@@ -4,7 +4,6 @@ export default async function getPokemons() {
       `https://pokeapi.co/api/v2/pokemon?offset=20&limit=200`
     );
     const data = await res.json();
-    console.log(data);
     return data;
   } catch (error) {}
 }

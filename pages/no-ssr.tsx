@@ -11,13 +11,11 @@ const NoSsr = () => {
   useEffect(() => {
     const fetchData = async () => {
       const fetchData = await getPokemons();
-      console.log("q wea", fetchData);
       setPokemon(fetchData.results);
     };
     fetchData().catch(console.error);
   }, []);
 
-  console.log(pokemon);
   return (
     <div className={styles.container}>
       <Head>
