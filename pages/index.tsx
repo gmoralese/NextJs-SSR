@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
 const Home = ({ ...props }) => {
@@ -19,7 +20,7 @@ const Home = ({ ...props }) => {
 
         <ul>
           {props.pokemon.map((pokemon: any, index: number) => {
-            return <li key={index}>{pokemon.name}</li>;
+            return <div key={index}><Link href={`/types/${pokemon.name}`}><li key={index}>{pokemon.name}</li></Link><br /></div>;
           })}
         </ul>
       </main>
@@ -44,7 +45,7 @@ export default Home;
 
 export async function getServerSideProps() {
   const res = await fetch(
-    `https://pokeapi.co/api/v2/pokemon?offset=20&limit=200`
+    `https://pokeapi.co/api/v2/type`
   );
   const data = await res.json();
 
