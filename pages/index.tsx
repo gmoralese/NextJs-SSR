@@ -20,7 +20,14 @@ const Home = ({ ...props }) => {
 
         <ul>
           {props.pokemon.map((pokemon: any, index: number) => {
-            return <div key={index}><Link href={`/types/${pokemon.name}`}><li key={index}>{pokemon.name}</li></Link><br /></div>;
+            return (
+              <div key={index}>
+                <Link href={`/types/${pokemon.name}`}>
+                  <li key={index}>{pokemon.name}</li>
+                </Link>
+                <br />
+              </div>
+            );
           })}
         </ul>
       </main>
@@ -44,14 +51,12 @@ const Home = ({ ...props }) => {
 export default Home;
 
 export async function getServerSideProps() {
-  const res = await fetch(
-    `https://pokeapi.co/api/v2/type`
-  );
+  const res = await fetch(`https://pokeapi.co/api/v2/type`);
   const data = await res.json();
 
   return {
     props: {
       pokemon: data.results,
-    }, // will be passed to the page component as props
+    },
   };
 }

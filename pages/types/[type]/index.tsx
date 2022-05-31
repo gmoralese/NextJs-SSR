@@ -1,18 +1,24 @@
 import Link from "next/link";
 
-export default function PokemonByTypes({ ...props }) { 
-  console.log(props)
+export default function PokemonByTypes({ ...props }) {
   return (
     <ul>
-    {props.pokemon && props.pokemon.map((pokemon: any, index: number) => {
-      return <div key={index}><Link href={`/types/${props.type.type}/${pokemon.pokemon.name}`}><li key={index}>{pokemon.pokemon.name}</li></Link><br /></div>;
-    })}
-  </ul>
-  )
+      {props.pokemon &&
+        props.pokemon.map((pokemon: any, index: number) => {
+          return (
+            <div key={index}>
+              <Link href={`/types/${props.type.type}/${pokemon.pokemon.name}`}>
+                <li key={index}>{pokemon.pokemon.name}</li>
+              </Link>
+              <br />
+            </div>
+          );
+        })}
+    </ul>
+  );
 }
 
-
-export async function getStaticProps(context: any) {
+export async function getServerSideProps(context: any) {
   const res = await fetch(
     `https://pokeapi.co/api/v2/type/${context.params.type}`
   );
@@ -21,16 +27,7 @@ export async function getStaticProps(context: any) {
   return {
     props: {
       pokemon: data.pokemon,
-      type: context.params
-      }
-  }
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: [
-      { params: { "type": "string"} }
-    ],
-    fallback: true // false or 'blocking'
+      type: context.params,
+    },
   };
 }
