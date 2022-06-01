@@ -22,7 +22,7 @@ const Home = ({ ...props }) => {
           {props.pokemon.map((pokemon: any, index: number) => {
             return (
               <div key={index}>
-                <Link href={`/types/${pokemon.name}`}>
+                <Link href={`/${pokemon.name}`}>
                   <li key={index}>{pokemon.name}</li>
                 </Link>
                 <br />

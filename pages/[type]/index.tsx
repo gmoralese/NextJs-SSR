@@ -7,7 +7,7 @@ export default function PokemonByTypes({ ...props }) {
         props.pokemon.map((pokemon: any, index: number) => {
           return (
             <div key={index}>
-              <Link href={`/types/${props.type.type}/${pokemon.pokemon.name}`}>
+              <Link href={`/${props.type.type}/${pokemon.pokemon.name}`}>
                 <li key={index}>{pokemon.pokemon.name}</li>
               </Link>
               <br />
@@ -22,6 +22,7 @@ export async function getServerSideProps(context: any) {
   const res = await fetch(
     `https://pokeapi.co/api/v2/type/${context.params.type}`
   );
+  console.log(res);
   const data = await res.json();
 
   return {
